@@ -1,7 +1,7 @@
 // Import React hooks and dependencies
 import React, { useCallback, useEffect, useState } from "react";
-import "quill/dist/quill.snow.css";   // Quill editor styles
-import Quill from "quill";            // Quill rich text editor
+import "quill/dist/quill.snow.css"; // Quill editor styles
+import Quill from "quill"; // Quill rich text editor
 import { io } from "socket.io-client"; // Socket.IO client for real-time communication
 import { useParams } from "react-router-dom"; // Get document ID from URL
 
@@ -31,7 +31,7 @@ export default function TextEditor() {
 
   // Initialize socket connection when component mounts
   useEffect(() => {
-    const s = io("http://localhost:3001"); // Connect to backend server
+    const s = io(import.meta.env.VITE_BACKEND_URL); // Connect to backend server
     setSocket(s);
 
     // Cleanup: disconnect socket when component unmounts
@@ -48,7 +48,7 @@ export default function TextEditor() {
     socket.once("load-document", (document) => {
       console.log("Loaded document:", document);
       quill.setContents(document); // Set editor contents
-      quill.enable();              // Enable editing
+      quill.enable(); // Enable editing
     });
 
     // Request document by ID
@@ -116,9 +116,9 @@ export default function TextEditor() {
       modules: { toolbar: TOOLBAR_OPTIONS },
     });
 
-    q.disable();           // Disable until document loads
+    q.disable(); // Disable until document loads
     q.setText("Loading..."); // Placeholder text
-    setQuill(q);           // Save editor instance in state
+    setQuill(q); // Save editor instance in state
   }, []);
 
   // Render editor container

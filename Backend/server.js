@@ -2,14 +2,15 @@
 require("dotenv").config();
 
 // Import required modules
-const { Server } = require("socket.io");   // Socket.IO for real-time communication
-const mongoose = require("mongoose");      // Mongoose for MongoDB connection
-const Document = require("./schema");      // Document model (schema.js)
+const { Server } = require("socket.io"); // Socket.IO for real-time communication
+const mongoose = require("mongoose"); // Mongoose for MongoDB connection
+const Document = require("./schema"); // Document model (schema.js)
 
 // Connect to MongoDB using connection string stored in .env
-mongoose.connect(process.env.DB_CONNECTION_SECRET)
+mongoose
+  .connect(process.env.DB_CONNECTION_SECRET)
   .then(() => console.log("MongoDB connected"))
-  .catch(err => {
+  .catch((err) => {
     console.error("MongoDB connection error:", err);
   });
 
@@ -20,7 +21,10 @@ const defaultValue = { ops: [] };
 // Allow CORS requests from frontend running on http://localhost:5173
 const io = new Server(3001, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://google-docs-clone-yvcm.onrender.com",
+    ],
     methods: ["GET", "POST"],
   },
 });
