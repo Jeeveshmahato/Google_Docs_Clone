@@ -24,6 +24,7 @@ const io = new Server(3001, {
     origin: [
       "http://localhost:5173",
       "https://google-docs-clone-yvcm.onrender.com",
+      "https://google-docs-clone-nine-green.vercel.app/",
     ],
     methods: ["GET", "POST"],
   },
