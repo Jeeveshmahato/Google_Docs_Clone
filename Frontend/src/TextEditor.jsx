@@ -37,6 +37,8 @@ export default function TextEditor() {
     // Cleanup: disconnect socket when component unmounts
     return () => {
       s.disconnect();
+
+      
     };
   }, []);
 
